@@ -15,6 +15,7 @@ use Jsvrcek\ICS\Model\Calendar;
 use Jsvrcek\ICS\Model\CalendarEvent;
 use Jsvrcek\ICS\Model\Relationship\Attendee;
 use Jsvrcek\ICS\Model\Relationship\Organizer;
+use Jsvrcek\ICS\Model\Description\Location;
 use Jsvrcek\ICS\Utility\Formatter;
 use Jsvrcek\ICS\CalendarStream;
 use Jsvrcek\ICS\CalendarExport;
@@ -52,6 +53,16 @@ class Ics_file {
             ->setSummary($service['name'])
             ->setUid($appointment['id']);
 
+        // Add the customer address as location.
+        $location = new Location(new Formatter());
+
+        if (isset($customer['address']) && ! empty($customer['address']))
+        {
+            $location->setName($customer['address']);
+        }
+
+        $event->addLocation($location);
+
         // Add the customer attendee.
         $attendee = new Attendee(new Formatter());
 
@@ -78,7 +89,7 @@ class Ics_file {
 
         $calendar
             ->setProdId('-//EasyAppointments//Open Source Web Scheduler//EN')
-            ->setTimezone(new DateTimeZone(date_default_timezone_get()))
+            ->setTimezone(new DateTimeZone('Europe/Zurich'))
             ->addEvent($event);
 
         // Setup exporter.

@@ -14,8 +14,9 @@
     <link rel="stylesheet" type="text/css" href="<?= asset_url('assets/ext/cookieconsent/cookieconsent.min.css') ?>">
     <link rel="stylesheet" type="text/css" href="<?= asset_url('assets/css/frontend.css') ?>">
     <link rel="stylesheet" type="text/css" href="<?= asset_url('assets/css/general.css') ?>">
+	<link rel="stylesheet" type="text/css" href="<?= asset_url('assets/css/custom.css') ?>">
 
-    <link rel="icon" type="image/x-icon" href="<?= asset_url('assets/img/favicon.ico') ?>">
+    <link rel="icon" type="image/x-icon" href="<?= asset_url('assets/img/favicon_bium.ico') ?>">
     <link rel="icon" sizes="192x192" href="<?= asset_url('assets/img/logo.png') ?>">
 </head>
 
@@ -46,30 +47,6 @@
                     </div>
                 </div>
 
-                <?php if ($manage_mode): ?>
-                <div id="cancel-appointment-frame" class="booking-header-bar row">
-                    <div class="col-xs-12 col-sm-10">
-                        <p><?= lang('cancel_appointment_hint') ?></p>
-                    </div>
-                    <div class="col-xs-12 col-sm-2">
-                        <form id="cancel-appointment-form" method="post"
-                              action="<?= site_url('appointments/cancel/' . $appointment_data['hash']) ?>">
-                            <input type="hidden" name="csrfToken" value="<?= $this->security->get_csrf_hash() ?>" />
-                            <textarea name="cancel_reason" style="display:none"></textarea>
-                            <button id="cancel-appointment" class="btn btn-default btn-sm"><?= lang('cancel') ?></button>
-                        </form>
-                    </div>
-                </div>
-                <div class="booking-header-bar row">
-                    <div class="col-xs-12 col-sm-10">
-                        <p><?= lang('delete_personal_information_hint') ?></p>
-                    </div>
-                    <div class="col-xs-12 col-sm-2">
-                        <button id="delete-personal-information" class="btn btn-danger btn-sm"><?= lang('delete') ?></button>
-                    </div>
-                </div>
-                <?php endif; ?>
-
                 <?php
                     if (isset($exceptions)) {
                         echo '<div style="margin: 10px">';
@@ -85,7 +62,11 @@
 
                 <div id="wizard-frame-1" class="wizard-frame">
                     <div class="frame-container">
-                        <h3 class="frame-title"><?= lang('step_one_title') ?></h3>
+					<?php if ($manage_mode): ?>
+                        <h3 class="frame-title"><?= lang('modify_step_one_title') ?></h3>
+					<?php else: ?>
+						<h3 class="frame-title"><?= lang('step_one_title') ?></h3>
+					<?php endif; ?>
 
                         <div class="frame-content">
                             <div class="form-group">
@@ -174,7 +155,11 @@
                 <div id="wizard-frame-2" class="wizard-frame" style="display:none;">
                     <div class="frame-container">
 
-                        <h3 class="frame-title"><?= lang('step_two_title') ?></h3>
+                        <?php if ($manage_mode): ?>
+							<h3 class="frame-title"><?= lang('modify_step_two_title') ?></h3>
+						<?php else: ?>
+							<h3 class="frame-title"><?= lang('step_two_title') ?></h3>
+						<?php endif; ?>
 
                         <div class="frame-content row">
                             <div class="col-xs-12 col-sm-6">
@@ -206,7 +191,11 @@
                 <div id="wizard-frame-3" class="wizard-frame" style="display:none;">
                     <div class="frame-container">
 
-                        <h3 class="frame-title"><?= lang('step_three_title') ?></h3>
+                        <?php if ($manage_mode): ?>
+							<h3 class="frame-title"><?= lang('modify_step_three_title') ?></h3>
+						<?php else: ?>
+							<h3 class="frame-title"><?= lang('step_three_title') ?></h3>
+						<?php endif; ?>
 
                         <div class="frame-content row">
                             <div class="col-xs-12 col-sm-6">
@@ -230,20 +219,21 @@
 
                             <div class="col-xs-12 col-sm-6">
                                 <div class="form-group">
-                                    <label for="address" class="control-label"><?= lang('address') ?></label>
-                                    <input type="text" id="address" class="form-control" maxlength="120" />
+                                    <label for="address" class="control-label"><?= lang('address') ?> *</label>
+									<label for="address_hint" class="address_hint"><?= lang('address_hint') ?></label>
+                                    <input type="text" id="address" class="required form-control" maxlength="120" />
+                                </div>
+                                <!--<div class="form-group">
+                                    <label for="city" class="control-label"><?= lang('city') ?> *</label>
+                                    <input type="text" id="city" class="required form-control" maxlength="120" />
                                 </div>
                                 <div class="form-group">
-                                    <label for="city" class="control-label"><?= lang('city') ?></label>
-                                    <input type="text" id="city" class="form-control" maxlength="120" />
-                                </div>
+                                    <label for="zip-code" class="control-label"><?= lang('zip_code') ?> *</label>
+                                    <input type="text" id="zip-code" class="required form-control" maxlength="120" />
+                                </div>-->
                                 <div class="form-group">
-                                    <label for="zip-code" class="control-label"><?= lang('zip_code') ?></label>
-                                    <input type="text" id="zip-code" class="form-control" maxlength="120" />
-                                </div>
-                                <div class="form-group">
-                                    <label for="notes" class="control-label"><?= lang('notes') ?></label>
-                                    <textarea id="notes" maxlength="500" class="form-control" rows="3"></textarea>
+                                    <label for="notes" class="control-label"><?= lang('notes') ?> *</label>
+                                    <textarea placeholder="<?= lang('notes_placeholder')?>" id="notes" maxlength="500" class="required form-control" rows="3"></textarea>
                                 </div>
                             </div>
 
@@ -265,7 +255,7 @@
                                 <input type="checkbox" class="required" id="accept-to-privacy-policy">
                                 <?= strtr(lang('read_and_agree_to_privacy_policy'),
                                     [
-                                        '{$link}' => '<a href="#" data-toggle="modal" data-target="#privacy-policy-modal">',
+                                        '{$link}' => '<a href="https://bium.ch/legalinformation" target="_blank">',
                                         '{/$link}' => '</a>'
                                     ])
                                 ?>
@@ -330,6 +320,30 @@
                         </form>
                     </div>
                 </div>
+				
+				<?php if ($manage_mode): ?>
+                <div id="cancel-appointment-frame" class="booking-header-bar row">
+                    <div class="col-xs-12 col-sm-10">
+                        <p><?= lang('cancel_appointment_hint') ?></p>
+                    </div>
+                    <div class="col-xs-12 col-sm-2">
+                        <form id="cancel-appointment-form" method="post"
+                              action="<?= site_url('appointments/cancel/' . $appointment_data['hash']) ?>">
+                            <input type="hidden" name="csrfToken" value="<?= $this->security->get_csrf_hash() ?>" />
+                            <textarea name="cancel_reason" style="display:none"></textarea>
+                            <button id="cancel-appointment" class="btn btn-default btn-sm"><?= lang('cancel') ?></button>
+                        </form>
+                    </div>
+                </div>
+                <div class="booking-header-bar row">
+                    <div class="col-xs-12 col-sm-10">
+                        <p><?= lang('delete_personal_information_hint') ?></p>
+                    </div>
+                    <div class="col-xs-12 col-sm-2">
+                        <button id="delete-personal-information" class="btn btn-danger btn-sm"><?= lang('delete') ?></button>
+                    </div>
+                </div>
+                <?php endif; ?>
 
                 <!-- FRAME FOOTER -->
 

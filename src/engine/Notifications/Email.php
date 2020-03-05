@@ -137,28 +137,35 @@ class Email {
             '$email_message' => $message->get(),
             '$appointment_service' => $service['name'],
             '$appointment_provider' => $provider['first_name'] . ' ' . $provider['last_name'],
-            '$appointment_start_date' => date($date_format . ' ' . $timeFormat, strtotime($appointment['start_datetime'])),
-            '$appointment_end_date' => date($date_format . ' ' . $timeFormat, strtotime($appointment['end_datetime'])),
+            '$appointment_date' => date($date_format . ' ' . $timeFormat, strtotime($appointment['start_datetime'])),
+            '$appointment_duration' => $service['duration'] . ' ' . $this->framework->lang->line('minutes'),
             '$appointment_link' => $appointmentLink->get(),
+			'$appointment_notes' => $appointment['notes'],
             '$company_link' => $company['company_link'],
             '$company_name' => $company['company_name'],
             '$customer_name' => $customer['first_name'] . ' ' . $customer['last_name'],
             '$customer_email' => $customer['email'],
             '$customer_phone' => $customer['phone_number'],
             '$customer_address' => $customer['address'],
+			'$customer_zipcode' => $customer['zip_code'],
+			'$customer_city' => $customer['city'],
 
             // Translations
             'Appointment Details' => $this->framework->lang->line('appointment_details_title'),
             'Service' => $this->framework->lang->line('service'),
             'Provider' => $this->framework->lang->line('provider'),
-            'Start' => $this->framework->lang->line('start'),
-            'End' => $this->framework->lang->line('end'),
+            'Date' => $this->framework->lang->line('start'),
+            'Duration' => $this->framework->lang->line('duration'),
             'Customer Details' => $this->framework->lang->line('customer_details_title'),
+			'Zip Code' => $this->framework->lang->line('zip_code'),
+			'City' => $this->framework->lang->line('city'),
             'Name' => $this->framework->lang->line('name'),
             'Email' => $this->framework->lang->line('email'),
             'Phone' => $this->framework->lang->line('phone'),
             'Address' => $this->framework->lang->line('address'),
-            'Appointment Link' => $this->framework->lang->line('appointment_link_title')
+            'Location' => $this->framework->lang->line('location'),
+            'Appointment Link' => $this->framework->lang->line('appointment_link_title'),
+			'Notes' => $this->framework->lang->line('notes')
         ];
 
         $html = file_get_contents(__DIR__ . '/../../application/views/emails/appointment_details.php');
@@ -262,6 +269,7 @@ class Email {
             'Email' => $this->framework->lang->line('email'),
             'Phone' => $this->framework->lang->line('phone'),
             'Address' => $this->framework->lang->line('address'),
+            'Location' => $this->framework->lang->line('location'),
             'Reason' => $this->framework->lang->line('reason')
         ];
 

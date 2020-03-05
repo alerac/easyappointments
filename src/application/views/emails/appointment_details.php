@@ -26,12 +26,20 @@
                     <td style="padding: 3px;">$appointment_provider</td>
                 </tr>
                 <tr>
-                    <td class="label" style="padding: 3px;font-weight: bold;">Start</td>
-                    <td style="padding: 3px;">$appointment_start_date</td>
+                    <td class="label" style="padding: 3px;font-weight: bold;">Date</td>
+                    <td style="padding: 3px;">$appointment_date</td>
                 </tr>
                 <tr>
-                    <td class="label" style="padding: 3px;font-weight: bold;">End</td>
-                    <td style="padding: 3px;">$appointment_end_date</td>
+                    <td class="label" style="padding: 3px;font-weight: bold;">Duration</td>
+                    <td style="padding: 3px;">$appointment_duration</td>
+                </tr>
+                <tr>
+                    <td class="label" style="padding: 3px;font-weight: bold;">Location</td>
+                    <td style="padding: 3px;">$customer_address</td>
+                </tr>
+				<tr>
+                    <td class="label" style="padding: 3px;font-weight: bold;">Notes</td>
+                    <td style="padding: 3px;">$appointment_notes</td>
                 </tr>
             </table>
 
@@ -48,10 +56,6 @@
                 <tr>
                     <td class="label" style="padding: 3px;font-weight: bold;">Phone</td>
                     <td style="padding: 3px;">$customer_phone</td>
-                </tr>
-                <tr>
-                    <td class="label" style="padding: 3px;font-weight: bold;">Address</td>
-                    <td style="padding: 3px;">$customer_address</td>
                 </tr>
             </table>
 

@@ -1,0 +1,84 @@
+/* ----------------------------------------------------------------------------
+ * Easy!Appointments - Open Source Web Scheduler
+ *
+ * @package     EasyAppointments
+ * @author      A.Tselegidis <alextselegidis@gmail.com>
+ * @copyright   Copyright (c) 2013 - 2018, Alex Tselegidis
+ * @license     http://opensource.org/licenses/GPL-3.0 - GPLv3
+ * @link        http://easyappointments.org
+ * @since       v1.0.0
+ * ---------------------------------------------------------------------------- */
+
+.ui-state-disabled,.ui-widget-content .ui-state-disabled,.ui-widget-header .ui-state-disabled {
+    opacity: .10;
+    filter: Alpha(Opacity=10);
+}
+
+.ui-state-default,.ui-widget-content .ui-state-default,.ui-widget-header .ui-state-default,.ui-button,html .ui-button.ui-state-disabled:hover,html .ui-button.ui-state-disabled:active {
+    font-weight: bolder;
+}
+
+html body .ui-datepicker td a.ui-state-active {
+    width: 25px;
+    height: 25px;
+}
+
+#book-appointment-wizard .book-step {
+	color: #FFFFFF;
+}
+
+body {
+    font-size: 16px;
+}
+
+#book-appointment-wizard .wizard-frame .command-buttons {
+    margin-top: 3.3em;
+}
+
+#book-appointment-wizard .wizard-frame .command-buttons .btn {
+    margin-top: 1.5em;
+}
+
+#frame-footer {
+	margin-top: 5em;
+}
+
+.booking-header-bar {
+	margin-top: 2.2em;
+	background-color: grey;
+	color: white;
+}
+
+.btn-sm {
+	background-color: #d3262b;
+	color: white;
+}
+
+.address_hint {
+	font-style: italic;
+	font-size: 80%;
+	opacity: 0.8; 
+}
+
+@media (min-width: 1200px){
+	.container {
+		width: 1480px;
+	}
+}
+
+@media (max-width: 768px) {
+	body .ui-widget {
+		width: 100%;
+	}
+	
+	#book-appointment-wizard #available-hours .available-hour {
+    margin-left: 5em;
+	}
+}
+
+@media (max-width: 860px) {
+	#book-appointment-wizard #header {
+		overflow: auto;
+		height: auto;
+	}
+}

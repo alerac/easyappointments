@@ -66,11 +66,11 @@ window.FrontendBook = window.FrontendBook || {};
             cookieconsent.initialise({
                 palette: {
                     popup: {
-                        background: '#ffffffbd',
-                        text: '#666666'
+                        background: 'rgb(0, 0, 0)',
+                        text: 'rgb(255, 255, 255)'
                     },
                     button: {
-                        background: '#3DD481',
+                        background: 'rgb(74, 151, 221)',
                         text: '#ffffff'
                     }
                 },
@@ -83,10 +83,10 @@ window.FrontendBook = window.FrontendBook || {};
             $('.cc-link').replaceWith(
                 $('<a/>', {
                     'data-toggle': 'modal',
-                    'data-target': '#cookie-notice-modal',
-                    'href': '#',
+                    'href': 'https://bium.ch/legalinformation',
+					'target': '_blank',
                     'class': 'cc-link',
-                    'text': $('.cc-link').text()
+                    'text': "Lire les informations légales"
                 })
             );
         }
@@ -212,6 +212,8 @@ window.FrontendBook = window.FrontendBook || {};
         $('#select-service').change(function () {
             var currServiceId = $('#select-service').val();
             $('#select-provider').empty();
+			
+			$('#select-provider').append(new Option(EALang.any_provider, 'any-provider'));
 
             $.each(GlobalVariables.availableProviders, function (indexProvider, provider) {
                 $.each(provider.services, function (indexService, serviceId) {
@@ -226,10 +228,10 @@ window.FrontendBook = window.FrontendBook || {};
                 });
             });
 
-            // Add the "Any Provider" entry.
+            /*// Add the "Any Provider" entry.
             if ($('#select-provider option').length >= 1) {
-                $('#select-provider').append(new Option('- ' + EALang.any_provider + ' -', 'any-provider'));
-            }
+                $('#select-provider').append(new Option(EALang.any_provider, 'any-provider'));
+            }*/
 
             FrontendBookApi.getUnavailableDates($('#select-provider').val(), $(this).val(),
                 $('#select-date').datepicker('getDate').toString('yyyy-MM-dd'));
@@ -529,6 +531,7 @@ window.FrontendBook = window.FrontendBook || {};
         var address = GeneralFunctions.escapeHtml($('#address').val());
         var city = GeneralFunctions.escapeHtml($('#city').val());
         var zipCode = GeneralFunctions.escapeHtml($('#zip-code').val());
+		var notes = GeneralFunctions.escapeHtml($('#notes').val());
 
         html =
             '<h4>' + firstName + ' ' + lastName + '</h4>' +
@@ -538,10 +541,12 @@ window.FrontendBook = window.FrontendBook || {};
             EALang.email + ': ' + email +
             '<br/>' +
             EALang.address + ': ' + address +
-            '<br/>' +
+			'<br/>' +
+			EALang.notes + ': ' + notes +
+            /*'<br/>' +
             EALang.city + ': ' + city +
             '<br/>' +
-            EALang.zip_code + ': ' + zipCode +
+            EALang.zip_code + ': ' + zipCode +*/
             '</p>';
 
         $('#customer-details').html(html);
@@ -557,7 +562,8 @@ window.FrontendBook = window.FrontendBook || {};
             phone_number: $('#phone-number').val(),
             address: $('#address').val(),
             city: $('#city').val(),
-            zip_code: $('#zip-code').val()
+            zip_code: $('#zip-code').val(),
+			notes: $('#notes').val()
         };
 
         postData.appointment = {
