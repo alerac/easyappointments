@@ -221,7 +221,7 @@
                                 <div class="form-group">
                                     <label for="address" class="control-label"><?= lang('address') ?> *</label>
 									<label for="address_hint" class="address_hint"><?= lang('address_hint') ?></label>
-                                    <input type="text" id="address" class="required form-control" maxlength="120" />
+                                    <input type="text" id="address" class="required form-control" maxlength="120" value="<?= lang('address_text_field') ?>" readonly="readonly" />
                                 </div>
                                 <!--<div class="form-group">
                                     <label for="city" class="control-label"><?= lang('city') ?> *</label>

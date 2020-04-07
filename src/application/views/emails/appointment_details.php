@@ -37,6 +37,10 @@
                     <td class="label" style="padding: 3px;font-weight: bold;">Location</td>
                     <td style="padding: 3px;">$customer_address</td>
                 </tr>
+                <tr>
+                    <td class="label" style="padding: 3px;font-weight: bold;">Videoconference Adress Info Label</td>
+                    <td style="padding: 3px;">Videoconference Adress Info</td>
+                </tr>
 				<tr>
                     <td class="label" style="padding: 3px;font-weight: bold;">Notes</td>
                     <td style="padding: 3px;">$appointment_notes</td>

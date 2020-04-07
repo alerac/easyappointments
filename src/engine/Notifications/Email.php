@@ -163,6 +163,8 @@ class Email {
             'Email' => $this->framework->lang->line('email'),
             'Phone' => $this->framework->lang->line('phone'),
             'Address' => $this->framework->lang->line('address'),
+            'Videoconference Adress Info Label' => $this->framework->lang->line('address_text_field_label'),
+            'Videoconference Adress Info' => $this->framework->lang->line('address_text_field_info'),
             'Location' => $this->framework->lang->line('location'),
             'Appointment Link' => $this->framework->lang->line('appointment_link_title'),
 			'Notes' => $this->framework->lang->line('notes')
@@ -269,6 +271,8 @@ class Email {
             'Email' => $this->framework->lang->line('email'),
             'Phone' => $this->framework->lang->line('phone'),
             'Address' => $this->framework->lang->line('address'),
+            'Videoconference Adress Info Label' => $this->framework->lang->line('address_text_field_label'),
+            'Videoconference Adress Info' => $this->framework->lang->line('address_text_field_info'),
             'Location' => $this->framework->lang->line('location'),
             'Reason' => $this->framework->lang->line('reason')
         ];
