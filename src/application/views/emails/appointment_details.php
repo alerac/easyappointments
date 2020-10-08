@@ -37,6 +37,10 @@
                     <td class="label" style="padding: 3px;font-weight: bold;">Location</td>
                     <td style="padding: 3px;">$customer_address</td>
                 </tr>
+				Room
+				$customer_remote_location_address
+				Online_Venue_Label
+				Online_Venue
 				<tr>
                     <td class="label" style="padding: 3px;font-weight: bold;">Notes</td>
                     <td style="padding: 3px;">$appointment_notes</td>

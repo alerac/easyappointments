@@ -529,11 +529,32 @@ window.FrontendBook = window.FrontendBook || {};
         var phoneNumber = GeneralFunctions.escapeHtml($('#phone-number').val());
         var email = GeneralFunctions.escapeHtml($('#email').val());
         var address = GeneralFunctions.escapeHtml($('#address').val());
+		var room = GeneralFunctions.escapeHtml($('#remote_location_address').val());
         var city = GeneralFunctions.escapeHtml($('#city').val());
         var zipCode = GeneralFunctions.escapeHtml($('#zip-code').val());
 		var notes = GeneralFunctions.escapeHtml($('#notes').val());
 
-        html =
+        if (room != "") {
+			html =
+            '<h4>' + firstName + ' ' + lastName + '</h4>' +
+            '<p>' +
+            EALang.phone + ': ' + phoneNumber +
+            '<br/>' +
+            EALang.email + ': ' + email +
+            '<br/>' +
+            EALang.address + ': ' + address +
+			'<br/>' +
+			EALang.remote_location_address + ': ' + room +
+			'<br/>' +
+			EALang.notes + ': ' + notes +
+            /*'<br/>' +
+            EALang.city + ': ' + city +
+            '<br/>' +
+            EALang.zip_code + ': ' + zipCode +*/
+            '</p>';
+		}
+		else {
+			html =
             '<h4>' + firstName + ' ' + lastName + '</h4>' +
             '<p>' +
             EALang.phone + ': ' + phoneNumber +
@@ -548,6 +569,7 @@ window.FrontendBook = window.FrontendBook || {};
             '<br/>' +
             EALang.zip_code + ': ' + zipCode +*/
             '</p>';
+		}
 
         $('#customer-details').html(html);
 
@@ -561,6 +583,7 @@ window.FrontendBook = window.FrontendBook || {};
             email: $('#email').val(),
             phone_number: $('#phone-number').val(),
             address: $('#address').val(),
+			remote_location_address: $('#remote_location_address').val(),
             city: $('#city').val(),
             zip_code: $('#zip-code').val(),
 			notes: $('#notes').val()
@@ -645,6 +668,9 @@ window.FrontendBook = window.FrontendBook || {};
             $('#email').val(customer.email);
             $('#phone-number').val(customer.phone_number);
             $('#address').val(customer.address);
+			if (customer.address == EALang.address_choice_work_place) {
+				$('#remote_location_address').val(customer.remote_location_address);
+			}
             $('#city').val(customer.city);
             $('#zip-code').val(customer.zip_code);
             var appointmentNotes = (appointment.notes !== null)

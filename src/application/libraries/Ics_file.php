@@ -58,7 +58,12 @@ class Ics_file {
 
         if (isset($customer['address']) && ! empty($customer['address']))
         {
-            $location->setName($customer['address']);
+            if (isset($customer['remote_location_address']) && ! empty($customer['remote_location_address'])) {
+				$location->setName($customer['address'].' - '.$customer['remote_location_address']);
+			}
+			else {
+				$location->setName($customer['address']);
+			}
         }
 
         $event->addLocation($location);

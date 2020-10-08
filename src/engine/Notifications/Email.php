@@ -147,6 +147,7 @@ class Email {
             '$customer_email' => $customer['email'],
             '$customer_phone' => $customer['phone_number'],
             '$customer_address' => $customer['address'],
+			'$customer_remote_location_address' => $customer['remote_location_address'],
 			'$customer_zipcode' => $customer['zip_code'],
 			'$customer_city' => $customer['city'],
 
@@ -164,9 +165,24 @@ class Email {
             'Phone' => $this->framework->lang->line('phone'),
             'Address' => $this->framework->lang->line('address'),
             'Location' => $this->framework->lang->line('location'),
+			//
+			'Room' => "",
+			'Online_Venue_Label' => "",
+			'Online_Venue' => "",
+			//
             'Appointment Link' => $this->framework->lang->line('appointment_link_title'),
 			'Notes' => $this->framework->lang->line('notes')
         ];
+		
+		if (!empty ($customer['remote_location_address'])) {
+			$replaceArray['Room'] = '<tr><td class="label" style="padding: 3px;font-weight: bold;">'.$this->framework->lang->line('remote_location_address').'</td>';
+			$replaceArray['$customer_remote_location_address'] = '<td style="padding: 3px;">'.$customer['remote_location_address'].'</td></tr>';
+		}
+		
+		if ($customer['address'] == lang('address_choice_visio')) {
+			$replaceArray['Online_Venue_Label'] = '<tr><td class="label" style="padding: 3px;font-weight: bold;">'.$this->framework->lang->line('Online_Venue_Label').'</td>';
+			$replaceArray['Online_Venue'] = '<td style="padding: 3px;">'.$this->framework->lang->line('Online_Venue').'</td></tr>';
+		}
 
         $html = file_get_contents(__DIR__ . '/../../application/views/emails/appointment_details.php');
         $html = $this->_replaceTemplateVariables($replaceArray, $html);

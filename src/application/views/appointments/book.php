@@ -216,12 +216,23 @@
                                     <input type="text" id="phone-number" class="required form-control" maxlength="60" />
                                 </div>
                             </div>
+							
+							<?php 
+								$address_choice_work_place = lang('address_choice_work_place');
+							?>
 
                             <div class="col-xs-12 col-sm-6">
                                 <div class="form-group">
                                     <label for="address" class="control-label"><?= lang('address') ?> *</label>
-									<label for="address_hint" class="address_hint"><?= lang('address_hint') ?></label>
-                                    <input type="text" id="address" class="required form-control" maxlength="120" />
+                                    <select id="address" onchange="showDiv('hidden_div', this)" class="required form-control">
+										<option value="<?= lang('address_choice_library') ?>"><?= lang('address_choice_library') ?></option>
+										<option value="<?= lang('address_choice_work_place') ?>"><?= lang('address_choice_work_place') ?></option>
+										<option value="<?= lang('address_choice_visio') ?>"><?= lang('address_choice_visio') ?></option>
+									</select>
+									<div style="display: none;" id="hidden_div">
+										<?= lang('address_hint')?> *
+										<input type="text" id="remote_location_address" maxlength="60" />
+									</div>
                                 </div>
                                 <!--<div class="form-group">
                                     <label for="city" class="control-label"><?= lang('city') ?> *</label>
@@ -235,35 +246,34 @@
                                     <label for="notes" class="control-label"><?= lang('notes') ?> *</label>
                                     <textarea placeholder="<?= lang('notes_placeholder')?>" id="notes" maxlength="500" class="required form-control" rows="3"></textarea>
                                 </div>
+								<?php if ($display_terms_and_conditions): ?>
+									<label>
+										<input type="checkbox" class="required" id="accept-to-terms-and-conditions">
+										<?= strtr(lang('read_and_agree_to_terms_and_conditions'),
+											[
+												'{$link}' => '<a href="#" data-toggle="modal" data-target="#terms-and-conditions-modal">',
+												'{/$link}' => '</a>'
+											])
+										?>
+									</label>
+									<br>
+								<?php endif ?>
+
+								<?php if ($display_privacy_policy): ?>
+								<label>
+									<input type="checkbox" class="required" id="accept-to-privacy-policy">
+									<?= strtr(lang('read_and_agree_to_privacy_policy'),
+										[
+											'{$link}' => '<a href="https://bium.ch/legalinformation" target="_blank">',
+											'{/$link}' => '</a>'
+										])
+									?>
+								</label>
+								<br>
+								<?php endif ?>
+
+								<span id="form-message" class="text-danger"><?= lang('fields_are_required') ?></span>
                             </div>
-
-                            <?php if ($display_terms_and_conditions): ?>
-                            <label>
-                                <input type="checkbox" class="required" id="accept-to-terms-and-conditions">
-                                <?= strtr(lang('read_and_agree_to_terms_and_conditions'),
-                                    [
-                                        '{$link}' => '<a href="#" data-toggle="modal" data-target="#terms-and-conditions-modal">',
-                                        '{/$link}' => '</a>'
-                                    ])
-                                ?>
-                            </label>
-                            <br>
-                            <?php endif ?>
-
-                            <?php if ($display_privacy_policy): ?>
-                            <label>
-                                <input type="checkbox" class="required" id="accept-to-privacy-policy">
-                                <?= strtr(lang('read_and_agree_to_privacy_policy'),
-                                    [
-                                        '{$link}' => '<a href="https://bium.ch/legalinformation" target="_blank">',
-                                        '{/$link}' => '</a>'
-                                    ])
-                                ?>
-                            </label>
-                            <br>
-                            <?php endif ?>
-
-                            <span id="form-message" class="text-danger"><?= lang('fields_are_required') ?></span>
                         </div>
                     </div>
 
@@ -411,6 +421,21 @@
             GeneralFunctions.enableLanguageSelection($('#select-language'));
         });
     </script>
+	
+	<script>
+		var adress_choice_workplace = <?= json_encode($address_choice_work_place) ?>;
+		function showDiv(divId, element)
+		{
+			document.getElementById(divId).style.display = element.value == adress_choice_workplace ? 'block' : 'none';
+			if (element.value == adress_choice_workplace){
+				document.getElementById("remote_location_address").className = "required form-control";
+			}
+			else {
+			document.getElementById("remote_location_address").className = "form-control";
+			document.getElementById("remote_location_address").value = "";
+			}
+		}
+	</script>
 
     <?php google_analytics_script(); ?>
 </body>
